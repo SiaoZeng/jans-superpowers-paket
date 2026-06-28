@@ -1,0 +1,13 @@
+{
+  "providers": {
+    "example-provider": {
+      "baseUrl": "https://example.invalid/v1",
+      "apiKeyEnv": "EXAMPLE_API_KEY",
+      "models": [
+        {
+          "id": "example-model"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "packages": [
+    "/absolute/path/to/jans-superpowers-paket"
+  ],
+  "defaultProvider": "example-provider",
+  "defaultModel": "example-model"
+}

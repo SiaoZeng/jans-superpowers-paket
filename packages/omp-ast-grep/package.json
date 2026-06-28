@@ -1,0 +1,59 @@
+{
+  "name": "omp-ast-grep",
+  "version": "0.1.0",
+  "description": "AST-aware code search and replace tools for OMP. Ports omo ast-grep tooling as an OMP extension with explicit-opt-in binary download.",
+  "type": "module",
+  "license": "MIT",
+  "keywords": [
+    "omp",
+    "omp",
+    "omp-coding-agent",
+    "omp-package",
+    "extension",
+    "ast-grep",
+    "sg",
+    "code-search",
+    "ast"
+  ],
+  "scripts": {
+    "test": "vitest --run",
+    "test:integration": "vitest --run test/sg-binary.integration.test.ts",
+    "test:watch": "vitest",
+    "typecheck": "tsgo --noEmit",
+    "lint": "biome check .",
+    "lint:fix": "biome check --write .",
+    "check": "tsgo --noEmit && biome check ."
+  },
+  "peerDependencies": {
+    "@earendil-works/pi-ai": "^0.74.0",
+    "@earendil-works/pi-coding-agent": "^0.74.0",
+    "@earendil-works/pi-tui": "^0.74.0",
+    "typebox": "*"
+  },
+  "dependencies": {
+    "@ast-grep/cli": "^0.42.3",
+    "extract-zip": "^2.0.1"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.3.5",
+    "@types/extract-zip": "^2.0.0",
+    "@types/node": "^22.10.5",
+    "@typescript/native-preview": "^7.0.0-dev.20260120.1",
+    "typescript": "^5.9.2",
+    "vitest": "^4.1.5"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "omp": {
+    "extensions": [
+      "./src/index.ts"
+    ],
+    "skills": [
+      "./skills"
+    ],
+    "prompts": [
+      "./prompts"
+    ]
+  }
+}

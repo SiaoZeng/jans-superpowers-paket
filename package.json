@@ -1,0 +1,51 @@
+{
+  "name": "jans-superpowers-paket",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Portable OMP Superpowers package with agents, skills, prompts, and extensions.",
+  "license": "MIT",
+  "keywords": [
+    "omp-package",
+    "omp",
+    "superpowers",
+    "skills",
+    "extensions",
+    "agents"
+  ],
+  "scripts": {
+    "validate": "node ./tests/validate-public-sanitization.mjs && node ./tests/validate-package-structure.mjs && node ./registries/validate-omp-agent-roster.mjs ./agents && node ./tests/validate-agent-discovery.mjs && bash ./tests/validate-portability.sh --class all && bash ./tests/validate-superpowers-governor.sh && bash ./tests/validate-superpowers-skill-lab.sh",
+    "validate:public": "node ./tests/validate-public-sanitization.mjs",
+    "validate:package": "node ./tests/validate-package-structure.mjs",
+    "validate:agents": "node ./registries/validate-omp-agent-roster.mjs ./agents && node ./tests/validate-agent-discovery.mjs",
+    "validate:portability": "bash ./tests/validate-portability.sh --class all",
+    "test:governor": "bash ./tests/validate-superpowers-governor.sh",
+    "test:skill-lab": "bash ./tests/validate-superpowers-skill-lab.sh"
+  },
+  "peerDependencies": {
+    "@earendil-works/pi-ai": "*",
+    "@earendil-works/pi-agent-core": "*",
+    "@earendil-works/pi-coding-agent": "*",
+    "@earendil-works/pi-tui": "*",
+    "typebox": "*"
+  },
+  "omp": {
+    "description": "OMP-native Superpowers package: bootstrap workflow arbitration first, then Superpowers governance and ECC extension surfaces.",
+    "extensions": [
+      "./extensions/superpowers-bootstrap.ts",
+      "./extensions/subagent/index.ts",
+      "./extensions/superpowers-governor/index.ts",
+      "./extensions/superpowers-commands.ts",
+      "./extensions/superpowers-skill-lab/index.ts",
+      "./extensions/ecc-omp-adapter.ts"
+    ],
+    "skills": [
+      "./skills"
+    ],
+    "prompts": [
+      "./prompts"
+    ],
+    "themes": [
+      "./themes"
+    ]
+  }
+}

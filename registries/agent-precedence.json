@@ -1,0 +1,11 @@
+{
+  "order": ["ecc-package", "superpowers-package", "user", "project"],
+  "conflictPolicy": "superpowers-wins",
+  "knownConflicts": [
+    "architect.md",
+    "code-reviewer.md",
+    "planner.md",
+    "refactor-cleaner.md",
+    "security-reviewer.md"
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "servers": {
+    "example-server": {
+      "command": [
+        "node",
+        "/absolute/path/to/server.js"
+      ]
+    }
+  }
+}

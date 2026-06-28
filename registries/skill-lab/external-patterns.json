@@ -1,0 +1,62 @@
+[
+  {
+    "name": "Darwinian Evolver",
+    "source_url": "https://github.com/imbue-ai/darwinian_evolver",
+    "retrieval_date": "2026-04-28",
+    "source_revision": null,
+    "license": "AGPL-3.0 reported by research; treat as reference-only unless separately reviewed",
+    "status": "spec-derived-pattern",
+    "extracted_concepts": ["organism lineage", "failure-case driven mutation", "evaluator/mutator separation"],
+    "rejected_concepts": ["external source import", "autonomous live runtime mutation", "license-incompatible vendoring"],
+    "omp_native_mapping": "Represent concepts through local TypeScript interfaces and quarantined run artifacts only.",
+    "materialization_policy": "No source code materialization; Phase 1 may only use spec-derived abstractions."
+  },
+  {
+    "name": "OpenEvolve",
+    "source_url": "https://github.com/algorithmicsuperintelligence/openevolve",
+    "retrieval_date": "2026-04-28",
+    "source_revision": null,
+    "license": "Reference pending local license review",
+    "status": "reference-only",
+    "extracted_concepts": ["program evolution loop", "evaluation-guided candidate selection", "artifact scoring"],
+    "rejected_concepts": ["optimizer backend", "external dependency import", "automatic promotion"],
+    "omp_native_mapping": "Defer optimizer concepts until a later approved plan; keep Phase 1 deterministic.",
+    "materialization_policy": "Registry record only; no code copy or runtime dependency."
+  },
+  {
+    "name": "Voyager",
+    "source_url": "https://github.com/MineDojo/Voyager",
+    "retrieval_date": "2026-04-28",
+    "source_revision": null,
+    "license": "Reference pending local license review",
+    "status": "reference-only",
+    "extracted_concepts": ["skill library growth", "curriculum loop", "self-verification traces"],
+    "rejected_concepts": ["game-environment dependency", "autonomous tool execution", "runtime skill overwrite"],
+    "omp_native_mapping": "Map durable learning to explicit candidate reports and manual promotion gates.",
+    "materialization_policy": "Registry record only; no code copy or runtime dependency."
+  },
+  {
+    "name": "GenericAgent",
+    "source_url": "https://github.com/lsdefine/GenericAgent",
+    "retrieval_date": "2026-04-28",
+    "source_revision": null,
+    "license": "Reference pending local license review",
+    "status": "reference-only",
+    "extracted_concepts": ["agent capability abstraction", "tool-use policy", "task memory separation"],
+    "rejected_concepts": ["framework import", "background service", "networked orchestration"],
+    "omp_native_mapping": "Keep capability abstractions as registry knowledge until OMP-native specs approve integration.",
+    "materialization_policy": "Registry record only; no code copy or runtime dependency."
+  },
+  {
+    "name": "MemSkill",
+    "source_url": "https://github.com/ViktorAxelsen/MemSkill",
+    "retrieval_date": "2026-04-28",
+    "source_revision": null,
+    "license": "Reference pending source confirmation",
+    "status": "reference-only",
+    "extracted_concepts": ["skill memory", "experience distillation", "retrieval-aware reuse"],
+    "rejected_concepts": ["unreviewed dataset ingestion", "GraphRAG schema change", "automatic memory write"],
+    "omp_native_mapping": "Represent memory-related ideas as future GraphRAG-backed plans, not Phase 1 runtime changes.",
+    "materialization_policy": "Registry record only; no code copy or runtime dependency."
+  }
+]

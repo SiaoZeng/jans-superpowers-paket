@@ -1,0 +1,2 @@
+{"id":"train-alpha","split":"trainable","input":"alpha request","expected":"TRAIN_MARKER: alpha","category":"marker","difficulty":"easy","source":"fixture","failure_type":"missing_train_marker"}
+{"id":"holdout-beta","split":"holdout","input":"beta request","expected":"HOLDOUT_MARKER: beta","category":"marker","difficulty":"easy","source":"fixture","failure_type":"missing_holdout_marker"}

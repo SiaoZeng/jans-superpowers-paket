@@ -1,0 +1,20 @@
+node_modules/
+*.log
+.tmp/
+tmp/
+.cache/
+dist/
+coverage/
+.DS_Store
+
+# Generated runtime or transient outputs
+execution-output/
+validation-output/
+skills/**/validation-artifacts/**
+skills/**/__pycache__/**
+skills/**/*.pyc
+
+# Local npm artifacts
+package-lock.json
+pnpm-lock.yaml
+yarn.lock

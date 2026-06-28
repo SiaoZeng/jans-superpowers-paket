@@ -1,0 +1,23 @@
+node_modules/
+*.log
+.tmp/
+tmp/
+.cache/
+dist/
+coverage/
+.DS_Store
+*.tgz
+
+# Private source-repo-only artifacts must never enter a public npm tarball.
+docs/
+plans/
+specs/
+inventory/
+packages/ecc-universal/
+
+# Generated runtime or transient outputs.
+execution-output/
+validation-output/
+skills/**/validation-artifacts/**
+skills/**/__pycache__/**
+skills/**/*.pyc

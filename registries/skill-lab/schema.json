@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Skill Lab External Pattern Registry",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": ["name", "source_url", "retrieval_date", "source_revision", "license", "status", "extracted_concepts", "rejected_concepts", "omp_native_mapping", "materialization_policy"],
+    "properties": {
+      "name": { "type": "string", "minLength": 1 },
+      "source_url": { "type": "string", "minLength": 1 },
+      "retrieval_date": { "type": "string", "minLength": 1 },
+      "source_revision": { "type": ["string", "null"] },
+      "license": { "type": "string", "minLength": 1 },
+      "status": { "enum": ["reference-only", "spec-derived-pattern", "rejected", "candidate"] },
+      "extracted_concepts": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+      "rejected_concepts": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+      "omp_native_mapping": { "type": "string", "minLength": 1 },
+      "materialization_policy": { "type": "string", "minLength": 1 }
+    }
+  }
+}

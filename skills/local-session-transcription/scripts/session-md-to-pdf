@@ -1,0 +1,146 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if [[ $# -lt 1 || $# -gt 2 ]]; then
+  echo "usage: session-md-to-pdf <input.md> [output.pdf]" >&2
+  exit 2
+fi
+
+input_md="$1"
+output_pdf="${2:-${input_md%.md}.pdf}"
+
+if [[ ! -f "$input_md" ]]; then
+  echo "input markdown not found: $input_md" >&2
+  exit 1
+fi
+
+chrome=""
+for candidate in google-chrome-stable google-chrome chromium chromium-browser; do
+  if command -v "$candidate" >/dev/null 2>&1; then
+    chrome="$candidate"
+    break
+  fi
+done
+
+if [[ -z "$chrome" ]]; then
+  echo "missing required browser: google-chrome-stable or chromium" >&2
+  exit 1
+fi
+
+tmp_html="$(mktemp --suffix=.html /tmp/session-transcript-pdf.XXXXXX)"
+trap 'rm -f "$tmp_html"' EXIT
+
+python3 - "$input_md" "$tmp_html" <<'PY'
+from __future__ import annotations
+
+import html
+import re
+import sys
+from pathlib import Path
+
+src = Path(sys.argv[1])
+out = Path(sys.argv[2])
+text = src.read_text(encoding="utf-8")
+
+lines = text.splitlines()
+body: list[str] = []
+in_ul = False
+in_code = False
+code_lines: list[str] = []
+
+def close_ul() -> None:
+    global in_ul
+    if in_ul:
+        body.append("</ul>")
+        in_ul = False
+
+def flush_code() -> None:
+    global in_code, code_lines
+    body.append("<pre><code>" + html.escape("\n".join(code_lines)) + "</code></pre>")
+    code_lines = []
+    in_code = False
+
+for raw in lines:
+    line = raw.rstrip()
+    if line.startswith("```"):
+        if in_code:
+            flush_code()
+        else:
+            close_ul()
+            in_code = True
+            code_lines = []
+        continue
+    if in_code:
+        code_lines.append(line)
+        continue
+    if not line.strip():
+        close_ul()
+        body.append("")
+        continue
+    m = re.match(r"^(#{1,6})\s+(.*)$", line)
+    if m:
+        close_ul()
+        level = len(m.group(1))
+        body.append(f"<h{level}>{html.escape(m.group(2))}</h{level}>")
+        continue
+    m = re.match(r"^-\s+(.*)$", line)
+    if m:
+        if not in_ul:
+            body.append("<ul>")
+            in_ul = True
+        body.append("<li>" + html.escape(m.group(1)) + "</li>")
+        continue
+    if line.startswith("> "):
+        close_ul()
+        body.append("<blockquote>" + html.escape(line[2:]) + "</blockquote>")
+        continue
+    close_ul()
+    body.append("<p>" + html.escape(line) + "</p>")
+
+if in_code:
+    flush_code()
+close_ul()
+
+title = src.stem
+html_doc = f"""<!doctype html>
+<html lang=\"zh-Hant-TW\">
+<head>
+<meta charset=\"utf-8\">
+<title>{html.escape(title)}</title>
+<style>
+@page {{ size: A4; margin: 18mm 16mm; }}
+body {{
+  font-family: \"Noto Sans CJK TC\", \"Noto Sans CJK\", \"Noto Sans\", sans-serif;
+  font-size: 11.5pt;
+  line-height: 1.62;
+  color: #111;
+}}
+h1 {{ font-size: 22pt; border-bottom: 1px solid #bbb; padding-bottom: 0.25em; }}
+h2 {{ font-size: 17pt; margin-top: 1.4em; border-bottom: 1px solid #ddd; padding-bottom: 0.2em; }}
+h3 {{ font-size: 13.5pt; margin-top: 1.1em; }}
+p {{ margin: 0.55em 0; text-align: justify; }}
+ul {{ margin: 0.4em 0 0.8em 1.4em; padding: 0; }}
+li {{ margin: 0.2em 0; }}
+code, pre {{ font-family: \"Noto Sans Mono CJK TC\", \"Noto Sans Mono\", monospace; }}
+pre {{ white-space: pre-wrap; background: #f7f7f7; padding: 0.8em; border: 1px solid #ddd; }}
+blockquote {{ margin: 0.8em 0; padding: 0.5em 0.8em; border-left: 4px solid #bbb; color: #333; background: #fafafa; }}
+</style>
+</head>
+<body>
+{chr(10).join(body)}
+</body>
+</html>
+"""
+out.write_text(html_doc, encoding="utf-8")
+PY
+
+mkdir -p "$(dirname -- "$output_pdf")"
+"$chrome" --headless --disable-gpu --no-sandbox --print-to-pdf="$output_pdf" "file://$tmp_html" >/tmp/session-md-to-pdf.chrome.log 2>&1
+
+if [[ ! -s "$output_pdf" ]]; then
+  echo "PDF generation failed; chrome log:" >&2
+  cat /tmp/session-md-to-pdf.chrome.log >&2 || true
+  exit 1
+fi
+
+printf '%s\n' "$output_pdf"

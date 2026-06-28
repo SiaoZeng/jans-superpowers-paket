@@ -1,0 +1,11 @@
+{
+  "order": ["ecc-package", "superpowers-package", "user", "project"],
+  "conflictPolicy": "superpowers-wins",
+  "pinned": {
+    "using-superpowers": "superpowers-package",
+    "verification-before-completion": "superpowers-package",
+    "requesting-code-review": "superpowers-package",
+    "security-review": "superpowers-package"
+  },
+  "eccAllowedAsFallback": true
+}
