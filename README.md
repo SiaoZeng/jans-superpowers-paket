@@ -16,7 +16,7 @@ This repository is the public distribution form. It intentionally excludes priva
 ## Install from a local checkout
 
 ```bash
-git clone <public-repository-url> jans-superpowers-paket
+git clone https://github.com/SiaoZeng/jans-superpowers-paket.git jans-superpowers-paket
 cd jans-superpowers-paket
 omp install "$PWD"
 ```

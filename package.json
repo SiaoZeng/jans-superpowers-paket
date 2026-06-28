@@ -47,5 +47,13 @@
     "themes": [
       "./themes"
     ]
+  },
+  "homepage": "https://github.com/SiaoZeng/jans-superpowers-paket#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SiaoZeng/jans-superpowers-paket.git"
+  },
+  "bugs": {
+    "url": "https://github.com/SiaoZeng/jans-superpowers-paket/issues"
   }
 }

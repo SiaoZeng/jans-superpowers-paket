@@ -62,7 +62,7 @@ omp install "$PWD/packages/omp-ast-grep"
 
 # 2. From a cloned canonical repo checkout
 # Clone first, install companion dependencies, then install the companion package by local path.
-git clone <public-repository-url> jans-superpowers-paket
+git clone https://github.com/SiaoZeng/jans-superpowers-paket.git jans-superpowers-paket
 cd jans-superpowers-paket/packages/omp-ast-grep && npm install
 omp install "$PWD"
 
@@ -244,7 +244,7 @@ brew install ast-grep
 ## Development
 
 ```bash
-git clone <public-repository-url> jans-superpowers-paket
+git clone https://github.com/SiaoZeng/jans-superpowers-paket.git jans-superpowers-paket
 cd jans-superpowers-paket/packages/omp-ast-grep
 npm install            # install dev + peer dependencies
 npm test               # run vitest

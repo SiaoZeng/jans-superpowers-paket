@@ -55,5 +55,14 @@
     "prompts": [
       "./prompts"
     ]
+  },
+  "homepage": "https://github.com/SiaoZeng/jans-superpowers-paket/tree/main/packages/omp-ast-grep",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SiaoZeng/jans-superpowers-paket.git",
+    "directory": "packages/omp-ast-grep"
+  },
+  "bugs": {
+    "url": "https://github.com/SiaoZeng/jans-superpowers-paket/issues"
   }
 }
